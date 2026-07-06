@@ -11,6 +11,7 @@ import roomsReducer from './slices/roomsSlice';
 import automationsReducer from './slices/automationsSlice';
 import authReducer from './slices/authSlice';
 import notificationsReducer from './slices/notificationsSlice';
+import smartDevicesReducer from './slices/smartDevicesSlice';
 import { controlSyncMiddleware } from './controlSyncMiddleware';
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   automations: automationsReducer,
   auth: authReducer,
   notifications: notificationsReducer,
+  smartDevices: smartDevicesReducer,
 });
 
 const persistConfig = {
@@ -29,7 +31,7 @@ const persistConfig = {
   storage: AsyncStorage,
   // auth is intentionally NOT persisted — the session is restored from the
   // securely stored token on launch via restoreSession().
-  whitelist: ['devices', 'scenes', 'activity', 'rooms', 'automations'],
+  whitelist: ['devices', 'scenes', 'activity', 'rooms', 'automations', 'smartDevices'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

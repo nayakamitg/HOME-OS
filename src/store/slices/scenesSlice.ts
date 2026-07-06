@@ -17,7 +17,7 @@ export interface Scene {
   createdAt: string;
 }
 
-interface ScenesState {
+export interface ScenesState {
   scenes: Scene[];
   activeSceneId: string | null;
 }

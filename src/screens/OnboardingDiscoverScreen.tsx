@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import Svg, { Path, Circle } from 'react-native-svg';
-import { AppStatusBar } from '../components/StatusBar';
 import { useTheme, ThemeColors } from '../theme/ThemeContext';
 import { useAppSelector } from '../store/hooks';
 
@@ -12,7 +11,7 @@ export function OnboardingDiscoverScreen({ navigation }: any) {
 
   return (
     <View style={styles.screen}>
-      <AppStatusBar />
+      <StatusBar />
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.topRow}>
           <TouchableOpacity style={styles.iconBtn} onPress={() => navigation.goBack()}>

@@ -17,7 +17,7 @@ export interface Device {
   addedAt: string;
 }
 
-interface DevicesState {
+export interface DevicesState {
   devices: Device[];
   discoveredDevices: DiscoveredDevice[];
   isScanning: boolean;

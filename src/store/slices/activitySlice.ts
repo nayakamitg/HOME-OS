@@ -11,7 +11,7 @@ export interface ActivityEvent {
   read: boolean;
 }
 
-interface ActivityState {
+export interface ActivityState {
   events: ActivityEvent[];
   filter: ActivityCategory;
 }

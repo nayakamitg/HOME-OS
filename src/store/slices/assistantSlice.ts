@@ -21,7 +21,7 @@ export interface Message {
   undoPayload?: any;
 }
 
-interface AssistantState {
+export interface AssistantState {
   messages: Message[];
   isTyping: boolean;
   isListening: boolean;

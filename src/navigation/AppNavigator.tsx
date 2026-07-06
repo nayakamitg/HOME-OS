@@ -22,6 +22,10 @@ import { AddSceneScreen } from '../screens/AddSceneScreen';
 import { ScenesScreen } from '../screens/ScenesScreen';
 import { AddAutomationScreen } from '../screens/AddAutomationScreen';
 import { AutomationDetailScreen } from '../screens/AutomationDetailScreen';
+import { NodesScreen } from '../screens/NodesScreen';
+import { NodeDetailScreen } from '../screens/NodeDetailScreen';
+import { AddNodeDeviceScreen } from '../screens/AddNodeDeviceScreen';
+import { SmartDeviceScreen } from '../screens/SmartDeviceScreen';
 import { Colors } from '../theme/colors';
 import { useTheme, ThemeColors } from '../theme/ThemeContext';
 
@@ -30,7 +34,7 @@ const Stack = createNativeStackNavigator();
 
 const TAB_ICONS: Record<string, (focused: boolean) => React.ReactNode> = {
   Home: (f) => <Svg width={22} height={22} viewBox="0 0 24 24"><Path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" /><Path d="M9 22V12h6v10" stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /></Svg>,
-  Devices: (f) => <Svg width={22} height={22} viewBox="0 0 24 24"><Rect x={3} y={3} width={7} height={7} rx={1.5} stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /><Rect x={14} y={3} width={7} height={7} rx={1.5} stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /><Rect x={3} y={14} width={7} height={7} rx={1.5} stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /><Rect x={14} y={14} width={7} height={7} rx={1.5} stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /></Svg>,
+  Nodes: (f) => <Svg width={22} height={22} viewBox="0 0 24 24"><Rect x={7} y={7} width={10} height={10} rx={1.5} stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /><Path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4" stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} strokeLinecap="round" /></Svg>,
   Automate: (f) => <Svg width={22} height={22} viewBox="0 0 24 24"><Path d="M13 2 3 14h9l-1 8 10-12h-9z" stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" /></Svg>,
   Activity: (f) => <Svg width={22} height={22} viewBox="0 0 24 24"><Path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" /></Svg>,
   Settings: (f) => <Svg width={22} height={22} viewBox="0 0 24 24"><Circle cx={12} cy={12} r={3} stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /><Path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-2.82 1.17V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9 1.65 1.65 0 0 0 4.27 7.18l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.09A1.65 1.65 0 0 0 10 3.09V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke={f ? Colors.accent : '#62626a'} strokeWidth={2} fill="none" /></Svg>,
@@ -70,7 +74,7 @@ function MainTabs() {
   return (
     <Tab.Navigator tabBar={(props) => <TabBar {...props} />} screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Home" component={DashboardScreen} />
-      <Tab.Screen name="Devices" component={DevicesScreen} />
+      <Tab.Screen name="Nodes" component={NodesScreen} />
       <Tab.Screen name="Automate" component={AutomateScreen} />
       <Tab.Screen name="Activity" component={ActivityScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
@@ -95,6 +99,10 @@ export function AppNavigator() {
         <Stack.Screen name="Scenes" component={ScenesScreen} />
         <Stack.Screen name="AddAutomation" component={AddAutomationScreen} />
         <Stack.Screen name="AutomationDetail" component={AutomationDetailScreen} />
+        <Stack.Screen name="Devices" component={DevicesScreen} />
+        <Stack.Screen name="NodeDetail" component={NodeDetailScreen} />
+        <Stack.Screen name="AddNodeDevice" component={AddNodeDeviceScreen} />
+        <Stack.Screen name="SmartDevice" component={SmartDeviceScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

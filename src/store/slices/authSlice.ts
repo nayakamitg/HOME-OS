@@ -5,7 +5,7 @@ import { BackendUser } from '../../api/types';
 
 export type AuthStatus = 'unknown' | 'authenticating' | 'authenticated' | 'offline' | 'unauthenticated';
 
-interface AuthState {
+export interface AuthState {
   token: string | null;
   user: BackendUser | null;
   status: AuthStatus;

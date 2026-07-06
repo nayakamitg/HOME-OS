@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
-import { AppStatusBar } from '../components/StatusBar';
 import { Colors } from '../theme/colors';
 import { useTheme, ThemeColors } from '../theme/ThemeContext';
 
@@ -16,7 +15,7 @@ export function HomeSwitcherScreen({ navigation }: any) {
   const styles = makeStyles(Colors);
   return (
     <View style={styles.screen}>
-      <AppStatusBar />
+      <StatusBar />
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={styles.title}>Your Homes</Text>

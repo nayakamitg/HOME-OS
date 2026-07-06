@@ -58,7 +58,7 @@ export interface Automation {
   triggerCount: number;
 }
 
-interface AutomationsState {
+export interface AutomationsState {
   automations: Automation[];
 }
 

@@ -11,7 +11,7 @@ export interface AppNotification {
   read: boolean;
 }
 
-interface NotificationsState {
+export interface NotificationsState {
   items: AppNotification[];
   /** The most recently pushed notification — drives the transient toast. */
   toast: AppNotification | null;

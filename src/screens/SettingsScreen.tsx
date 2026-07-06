@@ -1,14 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { AppStatusBar } from '../components/StatusBar';
 import { Toggle } from '../components/Toggle';
 import { useTheme, ThemeColors, useThemeMode } from '../theme/ThemeContext';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { logout } from '../store/slices/authSlice';
 import { disconnectRealtime } from '../services/realtime';
 
-export function SettingsScreen() {
+export function SettingsScreen({ navigation }: any) {
   const dispatch = useAppDispatch();
   const Colors = useTheme();
   const styles = useMemo(() => makeStyles(Colors), [Colors]);
@@ -48,6 +47,12 @@ export function SettingsScreen() {
       ],
     },
     {
+      title: 'Hardware',
+      items: [
+        { key: 'nodes', label: 'Nodes & Pins', sub: 'Manage ESP32 boards & GPIO', chevron: true, onPress: () => navigation.navigate('Nodes') },
+      ],
+    },
+    {
       title: 'App',
       items: [
         { key: 'dark', label: 'Dark mode', toggle: true, value: mode === 'dark', onToggle: toggleTheme },
@@ -67,7 +72,7 @@ export function SettingsScreen() {
 
   return (
     <View style={styles.screen}>
-      <AppStatusBar />
+      <StatusBar />
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         {/* Profile card */}
         <View style={styles.profileCard}>
@@ -84,7 +89,13 @@ export function SettingsScreen() {
             <Text style={styles.sectionTitle}>{section.title.toUpperCase()}</Text>
             <View style={styles.sectionCard}>
               {section.items.map((item: any, i, arr) => (
-                <View key={item.key} style={[styles.row, i < arr.length - 1 && styles.rowBorder]}>
+                <TouchableOpacity
+                  key={item.key}
+                  style={[styles.row, i < arr.length - 1 && styles.rowBorder]}
+                  activeOpacity={item.onPress ? 0.6 : 1}
+                  onPress={item.onPress}
+                  disabled={!item.onPress}
+                >
                   <View style={{ flex: 1 }}>
                     <Text style={styles.rowLabel}>{item.label}</Text>
                     {item.sub && <Text style={styles.rowSub}>{item.sub}</Text>}
@@ -94,7 +105,7 @@ export function SettingsScreen() {
                   ) : (
                     <Svg width={18} height={18} viewBox="0 0 24 24"><Path d="m9 18 6-6-6-6" stroke={Colors.textMuted} strokeWidth={2.2} strokeLinecap="round" fill="none"/></Svg>
                   )}
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           </View>

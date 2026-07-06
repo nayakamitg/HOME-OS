@@ -60,6 +60,7 @@ export function DashboardScreen({ navigation }: any) {
   const activeScene = scenes.find(s => s.id === activeSceneId);
 
   const favoriteDevices = FAV_IDS.map(id => devices.find(d => d.id === id)).filter(Boolean) as typeof devices;
+  const smartDevices = useAppSelector(s => s.smartDevices.items);
 
   return (
     <View style={styles.screen}>
@@ -153,6 +154,36 @@ export function DashboardScreen({ navigation }: any) {
           })}
         </ScrollView>
 
+        {/* Smart Devices — multi-switch boards, horizontal rail */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>SMART DEVICES</Text>
+          <Text style={styles.sectionLink}>{smartDevices.length}</Text>
+        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scenesScroll}>
+          {smartDevices.map(sd => {
+            const on = sd.switches.filter(Boolean).length;
+            const active = on > 0;
+            return (
+              <TouchableOpacity
+                key={sd.id}
+                style={[styles.smartCard, active && styles.smartCardActive]}
+                onPress={() => navigation.navigate('SmartDevice', { deviceId: sd.id })}
+                activeOpacity={0.85}
+              >
+                <View style={[styles.smartIcon, { backgroundColor: active ? 'rgba(91,140,255,0.2)' : 'rgba(255,255,255,0.05)' }]}>
+                  <Svg width={20} height={20} viewBox="0 0 24 24">
+                    <Rect x={3} y={4} width={18} height={16} rx={3} stroke={active ? '#5b8cff' : '#62626a'} strokeWidth={1.9} fill="none" />
+                    <Path d="M8 9v6M12 9v6M16 9v6" stroke={active ? '#5b8cff' : '#62626a'} strokeWidth={1.9} strokeLinecap="round" />
+                  </Svg>
+                </View>
+                <View style={{ flex: 1 }} />
+                <Text style={styles.smartName}>{sd.name}</Text>
+                <Text style={styles.smartSub}>{sd.switches.length} switches · {on} on</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+
         {/* Favorites */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>FAVORITES</Text>
@@ -214,7 +245,7 @@ export function DashboardScreen({ navigation }: any) {
 
       {/* AI FAB */}
       <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate('Assistant')} activeOpacity={0.85}>
-        <Svg width={26} height={26} viewBox="0 0 24 24"><Path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3ZM19 10v2a7 7 0 0 1-14 0v-2M12 19v3" stroke="#fff" strokeWidth={2} strokeLinecap="round" fill="none" /></Svg>
+        <Svg width={26} height={26} viewBox="0 0 24 24"><Path d="M12 2 9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5Z" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" /></Svg>
       </TouchableOpacity>
     </View>
   );
@@ -233,7 +264,7 @@ const makeStyles = (Colors: ThemeColors) => StyleSheet.create({
   notifDot: { position: 'absolute', top: 9, right: 10, width: 7, height: 7, borderRadius: 4, backgroundColor: Colors.danger, borderWidth: 1.5, borderColor: Colors.bg },
   avatar: { width: 40, height: 40, borderRadius: 14, backgroundColor: '#2a2a32', alignItems: 'center', justifyContent: 'center' },
   avatarText: { fontWeight: '700', fontSize: 15, color: Colors.textPrimary },
-  weatherCard: { borderRadius: 26, padding: 20, backgroundColor: '#1b2440', borderWidth: 1, borderColor: 'rgba(120,150,255,0.16)', marginBottom: 14 },
+  weatherCard: { borderRadius: 26, padding: 20, backgroundColor: '#1b2440', borderWidth: 1, borderColor: Colors.surface, marginBottom: 14 },
   weatherRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   statusRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 },
   statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: Colors.success },
@@ -259,6 +290,11 @@ const makeStyles = (Colors: ThemeColors) => StyleSheet.create({
   sceneIcon: { width: 36, height: 36, borderRadius: 12, alignItems: 'center', justifyContent: 'center', marginBottom: 26 },
   sceneLabel: { fontSize: 14, fontWeight: '600', color: Colors.textPrimary },
   sceneState: { fontSize: 11.5, color: Colors.textDim },
+  smartCard: { width: 148, borderRadius: 20, padding: 14, backgroundColor: Colors.surface, borderWidth: 1, borderColor: Colors.border, marginRight: 10, minHeight: 118 },
+  smartCardActive: { borderColor: 'rgba(91,140,255,0.45)', backgroundColor: 'rgba(91,140,255,0.10)' },
+  smartIcon: { width: 36, height: 36, borderRadius: 12, alignItems: 'center', justifyContent: 'center', marginBottom: 20 },
+  smartName: { fontSize: 14, fontWeight: '600', color: Colors.textPrimary },
+  smartSub: { fontSize: 11.5, color: Colors.textDim, marginTop: 2 },
   favGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 11, marginBottom: 24 },
   favCard: { width: '47.5%', borderRadius: 22, padding: 16, backgroundColor: Colors.surface, borderWidth: 1, borderColor: Colors.border },
   favCardTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 34 },

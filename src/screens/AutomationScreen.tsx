@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, TextInput, StatusBar } from 'react-native';
 import Svg, { Path, Circle } from 'react-native-svg';
-import { AppStatusBar } from '../components/StatusBar';
 import { Colors } from '../theme/colors';
 import { useTheme, ThemeColors } from '../theme/ThemeContext';
 

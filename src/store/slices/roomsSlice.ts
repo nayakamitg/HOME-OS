@@ -9,7 +9,7 @@ export interface Room {
   colorKey: string;
 }
 
-interface RoomsState {
+export interface RoomsState {
   rooms: Room[];
 }
 
